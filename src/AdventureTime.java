@@ -1,5 +1,7 @@
 import java.io.*;
-import java.util.Scanner;
+import java.util.*;
+import org.apache.commons.lang3.*;
+
 
 public class AdventureTime {
 
@@ -9,6 +11,7 @@ public class AdventureTime {
      * @throws IOException
      */
     public static void main(String[] args) throws IOException {
+
 
 
     }
@@ -22,7 +25,14 @@ public class AdventureTime {
      * @throws IOException
      */
     public static int challengeOne(String fileName) throws IOException {
-        return 0;
+        int bomboclat = 0;
+        int[] diddy = readFile(fileName);
+        for(int i = 1; i < diddy.length; i++){
+            if(diddy[i] > diddy[i-1]){
+                bomboclat = bomboclat + 1;
+            }
+        }
+        return bomboclat;
     }
 
     /** TODO 2
@@ -34,7 +44,19 @@ public class AdventureTime {
      * @throws FileNotFoundException
      */
     public static int challengeTwo(String fileName) throws FileNotFoundException {
-        return 0;
+        int[] data = readFile(fileName);
+        int increaseCount = 0;
+
+        for (int i = 0; i < data.length - 3; i++) {
+            int sum1 = data[i] + data[i + 1] + data[i + 2];
+            int sum2 = data[i + 1] + data[i + 2] + data[i + 3];
+
+            if (sum2 > sum1) {
+                increaseCount++;
+            }
+        }
+
+        return increaseCount;
     }
 
     /** TODO 3
@@ -46,7 +68,25 @@ public class AdventureTime {
      * @throws FileNotFoundException
      */
     public static int challengeThree(String fileName) throws FileNotFoundException {
-        return 0;
+        int linesInFile = countLinesInFile(fileName);
+        String[] hell = new String[linesInFile];
+        String[] diddy = new String[1];
+        int horizontal = 0;
+        int vertical = 0;
+        for(int i = 0; i < linesInFile; i++){
+            String gay = hell[i];
+            if( ArrayUtils.contains(diddy, "forward")){
+                horizontal = horizontal + Integer.valueOf(gay.substring(gay.length()-1));
+            }else if( ArrayUtils.contains(diddy, "down")){
+                vertical = vertical - Integer.valueOf(gay.substring(gay.length()-1));
+            } else if( ArrayUtils.contains(diddy, "up")){
+                vertical = vertical + Integer.valueOf(gay.substring(gay.length()-1));
+            }
+
+        }
+
+        return horizontal * vertical;
+
     }
 
     /** TODO 4
@@ -77,7 +117,7 @@ public class AdventureTime {
     /** This method will read the values in inputFilename into an array of integers, which it will return.
      * Do not edit this method.
      */
-    private static int[] readFile(String inputFilename) throws FileNotFoundException {
+    private static int[] readFile(String fileName) throws FileNotFoundException {
         File file = new File(inputFilename);
         Scanner scanner = new Scanner(file);
         int numberOfLinesInFile = countLinesInFile(inputFilename);
