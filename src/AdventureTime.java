@@ -1,6 +1,7 @@
+import org.apache.commons.lang3.ArrayUtils;
+
 import java.io.*;
-import java.util.*;
-import org.apache.commons.lang3.*;
+import java.util.Scanner;
 
 
 public class AdventureTime {
@@ -117,7 +118,7 @@ public class AdventureTime {
     /** This method will read the values in inputFilename into an array of integers, which it will return.
      * Do not edit this method.
      */
-    private static int[] readFile(String fileName) throws FileNotFoundException {
+    private static int[] readFile(String inputFilename) throws FileNotFoundException {
         File file = new File(inputFilename);
         Scanner scanner = new Scanner(file);
         int numberOfLinesInFile = countLinesInFile(inputFilename);
