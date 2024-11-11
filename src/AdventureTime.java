@@ -99,7 +99,29 @@ public class AdventureTime {
      * @throws FileNotFoundException
      */
     public static int challengeFour(String filename) throws FileNotFoundException {
-        return 0;
+        List<String> commands = readFile(fileName);
+        int horizontalPosition = 0;
+        int depth = 0;
+        int aim = 0;
+
+        for (String command : commands) {
+            String[] parts = command.split(" ");
+            String direction = parts[0];
+            int value = Integer.parseInt(parts[1]);
+
+            switch (direction) {
+                case "forward":
+                    horizontalPosition += value;
+                    depth += aim * value;
+                    break;
+                case "down":
+                    aim += value;
+                    break;
+                case "up":
+                    aim -= value;
+                    break;
+            }
+        }
     }
 
     /** This method will write the values passed as challengeOne, challengeTwo, challengeThree, and challengeFour to a text file.
